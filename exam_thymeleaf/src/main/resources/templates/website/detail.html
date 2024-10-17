@@ -1,0 +1,135 @@
+<html  xmlns:th="http://www.thymeleaf.org"  lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <title>Test</title>
+
+</head>
+<body>
+<header>
+
+    <div class="containerH" th:include="parts/fragments :: containerH" >
+
+
+    </div>
+
+    <div class="centerBread">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}" th:utext="'Les Factures'"></a></li>
+                <li class="breadcrumb-item active" aria-current="page" th:utext="'Facture n°'+${facture.id}"></li>
+            </ol>
+        </nav>
+
+    </div>
+
+
+</header>
+
+<main>
+    <div class="boutonsDetailFacture">
+
+        <a th:href="@{/ligne/{facture}(facture=${facture.id})}" >
+            <button class="btn btn-warning" >Voir les lignes</button>
+        </a>
+
+        <a th:href="@{/pdf/{facture}(facture=${facture.id})}" >
+            <button class="btn btn-success" >Exporter en pdf</button>
+        </a>
+
+
+    </div>
+
+            <div class="detailFacture" >
+                <div class="facture">
+                    <h1 th:utext="'Emetteur de la Facture'" ></h1>
+                    <p  th:utext="${facture.emeteur.siret}"  ></p>
+                    <p  th:utext="${facture.emeteur.numeroRue}+' '+${facture.emeteur.rue}"  ></p>
+                    <p  th:utext="${facture.emeteur.codePostal}+' - '+${facture.emeteur.ville}"  ></p>
+
+                </div>
+
+                <div class="facture">
+                    <h1 th:utext="'Destinataire'" ></h1>
+                    <p  th:utext="${facture.client.siret}"  ></p>
+                    <p  th:utext="${facture.client.numeroRue}+' '+${facture.client.rue}"  ></p>
+                    <p  th:utext="${facture.client.codePostal}+' - '+${facture.client.ville}"  ></p>
+                </div>
+
+            </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Quantité</th>
+            <th scope="col">Description</th>
+            <th scope="col">Prix Unitaire HT</th>
+            <th scope="col">TVA</th>
+            <th scope="col">Total HT</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block  th:each="ligne: ${facture.lignes}">
+            <tr>
+
+                <td th:utext="${ligne.quantity}"></td>
+                <td th:utext="${ligne.designation}"></td>
+                <td th:utext="${ligne.prixHt}+' €'"></td>
+                <td th:utext="${ligne.tva.libelle}"></td>
+                <td th:utext="${(ligne.prixHt * ligne.quantity)}+' €'"></td>
+
+            </tr>
+        </th:block>
+            <tr>
+
+                <td th:utext="''"></td>
+                <td th:utext="''"></td>
+                <td th:utext="''"></td>
+                <td th:utext="''"></td>
+                <td th:utext="''"></td>
+
+            </tr>
+        <tr>
+
+            <td th:utext="''"></td>
+            <td th:utext="''"></td>
+            <td th:utext="''"></td>
+            <td th:utext="'Total HT'"></td>
+            <td th:utext="${totalHT}"></td>
+
+        </tr>
+        <tr>
+
+            <td th:utext="''"></td>
+            <td th:utext="''"></td>
+            <td th:utext="''"></td>
+            <td th:utext="'Total TTC'"></td>
+            <td th:utext="${totalTTC}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="centerP">
+
+        <p th:utext="'Règlement par virement bancaire au plus tard le '+${#dates.format(facture.datePayment, 'dd/MM/yyyy')}+' + 90 jours'" ></p>
+        <p th:utext="'Tout retard de paiement d une quelconque facture fait courir, immédiatement et de plein droit, des intérêts de retard calculés au taux directeur de la BCE majoré de 7 points jusqu au paiement effectif et intégral '" ></p>
+
+
+    </div>
+
+
+</main>
+<footer th:include="parts/fragments :: footer">
+
+
+</footer>
+
+
+
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

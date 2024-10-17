@@ -1,0 +1,151 @@
+h1{
+    font-weight: bold;
+    font-size:30px;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+header {
+    width: 100%;
+    background-color: #4CAF50;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.content {
+    text-align: center;
+        display: flex;
+        flex-direction: column;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+
+footer {
+    width: 100%;
+    height: 60px;
+    background-color: #4CAF50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.containerH {
+
+    width: 95%;
+    margin: 20px 0 0 20px;
+
+}
+
+.underline {
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+}
+
+.underline h1 {
+
+    margin : 0 0 0 10px;
+
+}
+
+.centerBread {
+    width: 98%;
+    display: flex;
+    align-items: center;
+    margin: 20px 0 0 20px ;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: '>';
+    margin: 0 1px;
+}
+
+
+.factureContainer {
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.facture{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height : 100px;
+}
+
+.facture a{
+    margin 20px 0 0 0;
+    color: inherit;
+    text-decoration: underline;
+}
+
+.boutonsDetailFacture{
+    display: flex;
+    width = 100%;
+    justify-content: flex-end;
+    padding: 10px;
+
+}
+
+.boutonsDetailFacture a{
+
+    margin: 0 0 0 5px;
+
+}
+
+.detailFacture{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:10px;
+
+}
+
+.centerP{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.centerP p{
+
+    text-align: center;
+
+}

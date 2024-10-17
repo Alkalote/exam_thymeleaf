@@ -1,0 +1,21 @@
+<html  xmlns:th="http://www.thymeleaf.org"  lang="fr">
+<head>
+
+</head>
+<body>
+<header>
+
+</header>
+
+<main>
+
+    <h1 th:utext="'Facture n°'+${facture.id}" ></h1>
+    <p>Client : <span th:utext="${facture.client.raisonSociale}+' '+${facture.client.siret}"></span></p>
+    <p>Emeteur : <span th:utext="${facture.emeteur.raisonSociale}+' '+${facture.emeteur.siret}"></span></p>
+
+
+
+</main>
+
+</body>
+</html>

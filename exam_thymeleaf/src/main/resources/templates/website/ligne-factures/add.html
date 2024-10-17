@@ -1,0 +1,103 @@
+<html  xmlns:th="http://www.thymeleaf.org"  lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <title>Test</title>
+
+</head>
+<body>
+<header>
+
+    <div class="containerH" th:include="parts/fragments :: containerH" >
+
+
+    </div>
+
+    <div class="centerBread">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}" th:utext="'Les Factures'"></a></li>
+                <li class="breadcrumb-item"><a th:href="@{/detail/{facture}(facture=${facture.id})}" th:utext="'Facture n°'+${facture.id}"></a></li>
+                <li class="breadcrumb-item"><a th:href="@{/ligne/{facture}(facture=${facture.id})}" th:utext="'Les lignes'"></a></li>
+                <li class="breadcrumb-item active" aria-current="page" th:utext="'Ajout'"></li>
+            </ol>
+        </nav>
+
+    </div>
+
+
+</header>
+
+<main>
+    <div class="boutonsDetailFacture">
+
+        <a th:href="@{/ligne/{facture}(facture=${facture.id})}" >
+            <button class="btn btn-warning" >Retour</button>
+        </a>
+
+    </div>
+
+    <form class="needs-validation" novalidate th:object="${ligneFacture}" method="post">
+        <div class="form-group">
+            <label for="prixHt">Prix HT</label>
+            <input type="number" class="form-control" id="prixHt" placeholder="100" th:field="*{prixHt}" th:class="${#fields.hasErrors('prixHt')}? 'is-invalid form-control':'form-control'"   required>
+            <div th:if="${#fields.hasErrors('prixHt')}" th:errors="*{prixHt}" id="validationPrixHtFeedback" class="invalid-feedback">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="quantity">Quantité</label>
+            <input type="number" class="form-control" id="quantity" placeholder="100" th:field="*{quantity}" th:class="${#fields.hasErrors('quantity')}? 'is-invalid form-control':'form-control'"   required>
+            <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" id="validationQuantityFeedback" class="invalid-feedback">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="tva">Example select</label>
+            <select class="form-control" id="tva"  th:field="*{tva}" th:class="${#fields.hasErrors('tva')}? 'is-invalid form-control':'form-control'"  required>
+
+                <option value="0" th:utext="'Open this select menu'" ></option>
+                <th:block th:each="tva: ${tvas}">
+                    <option th:value="${tva.id}" th:utext="${tva.id}" ></option>
+                </th:block>
+
+            </select>
+            <div th:if="${#fields.hasErrors('tva')}" th:errors="*{tva}" id="validationTvaFeedback" class="invalid-feedback">
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="designation">Description</label>
+            <textarea class="form-control" id="designation" rows="3" th:field="*{designation}" th:class="${#fields.hasErrors('designation')}? 'is-invalid form-control':'form-control'" ></textarea>
+            <div th:if="${#fields.hasErrors('designation')}" th:errors="*{designation}" id="validationDesignationFeedback" class="invalid-feedback">
+
+            </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit form</button>
+    </form>
+
+
+
+
+
+
+
+</main>
+<footer th:include="parts/fragments :: footer">
+
+
+</footer>
+
+
+
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

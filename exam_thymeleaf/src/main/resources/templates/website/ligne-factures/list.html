@@ -1,0 +1,85 @@
+<html  xmlns:th="http://www.thymeleaf.org"  lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <title>Test</title>
+
+</head>
+<body>
+<header>
+
+    <div class="containerH" th:include="parts/fragments :: containerH" >
+
+
+    </div>
+
+    <div class="centerBread">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}" th:utext="'Les Factures'"></a></li>
+                <li class="breadcrumb-item"><a th:href="@{/detail/{facture}(facture=${facture.id})}" th:utext="'Facture n°'+${facture.id}"></a></li>
+                <li class="breadcrumb-item active" aria-current="page" th:utext="'Les lignes'"></li>
+            </ol>
+        </nav>
+
+    </div>
+
+
+</header>
+
+<main>
+    <div class="boutonsDetailFacture">
+
+        <a th:href="@{/detail/{facture}(facture=${facture.id})}" >
+            <button class="btn btn-warning" >Retour</button>
+        </a>
+
+        <a th:href="@{/ligne/{facture}/ajout(facture=${facture.id})}" >
+            <button class="btn btn-success" >Ajouter une ligne</button>
+        </a>
+
+
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Identifiant</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">TVA</th>
+            <th scope="col">Description</th>
+            <th scope="col">Prix Unitaire HT</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        <th:block  th:each="ligne: ${facture.lignes}">
+            <tr>
+
+                <td th:utext="${ligne.id}"></td>
+                <td th:utext="${ligne.quantity}"></td>
+                <td th:utext="${ligne.tva.libelle}"></td>
+                <td th:utext="${ligne.designation}"></td>
+                <td th:utext="${ligne.prixHt}+' €'"></td>
+
+
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+
+</main>
+<footer th:include="parts/fragments :: footer">
+
+
+</footer>
+
+
+
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

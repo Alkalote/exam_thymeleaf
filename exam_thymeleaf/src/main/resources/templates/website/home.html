@@ -1,0 +1,68 @@
+<html  xmlns:th="http://www.thymeleaf.org"  lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <title>Test</title>
+
+</head>
+<body>
+<header>
+
+    <div class="containerH" th:include="parts/fragments :: containerH" >
+
+
+    </div>
+
+    <div class="centerBread">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+            </ol>
+        </nav>
+
+    </div>
+
+
+</header>
+
+<main>
+
+    <div class="factureContainer" >
+        <th:block th:each="facture: ${factures}">
+
+            <div class="col-md-6 mb-3">
+                <div class="facture">
+                    <h1 th:utext="'Facture n°'+${facture.id}" ></h1>
+                    <p  th:utext="'Client : '+${facture.client.raisonSociale}"  ></p>
+                    <p  th:utext="'Emetteur : '+${facture.emeteur.raisonSociale}"  ></p>
+                    <p th:unless="${facture.datePayment}" th:utext="'A Regler'" ></p>
+                    <p th:if="${facture.datePayment}" th:utext="'Réglé le '+${#dates.format(facture.datePayment, 'dd/MM/yyyy')}" ></p>
+                    <a th:href="@{/detail/{facture}(facture=${facture.id})}" th:utext="'Voir la facture !'" ></a>
+
+                </div>
+            </div>
+
+
+
+
+        </th:block>
+    </div>
+
+
+
+
+
+
+</main>
+<footer th:include="parts/fragments :: footer">
+
+</footer>
+
+
+
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
